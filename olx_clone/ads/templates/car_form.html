@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Data Form</title>
+    <style>
+        /* Basic page styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        /* Form container */
+        .form-container {
+            width: 400px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Form elements styling */
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Submit button */
+        button[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        /* Centering form on the page */
+        .form-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="form-wrapper">
+        <div class="form-container">
+            <h1>Car Data Form</h1>
+            <form method="post" action="{% url 'run_script_view' %}">
+                {% csrf_token %}
+                <label for="car_name">Car Name:</label>
+                <input type="text" name="car_name" id="car_name" required>
+
+                <label for="year">Year:</label>
+                <input type="number" name="year" id="year" required>
+
+                <label for="present_price">Present Price:</label>
+                <input type="text" name="present_price" id="present_price" required>
+
+                <label for="kms_driven">KMs Driven:</label>
+                <input type="number" name="kms_driven" id="kms_driven" required>
+
+                <label for="fuel_type">Fuel Type:</label>
+                <input type="text" name="fuel_type" id="fuel_type" required>
+
+                <label for="seller_type">Seller Type:</label>
+                <input type="text" name="seller_type" id="seller_type" required>
+
+                <label for="transmission">Transmission:</label>
+                <input type="text" name="transmission" id="transmission" required>
+
+                <label for="owner">Owner:</label>
+                <input type="text" name="owner" id="owner" required>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

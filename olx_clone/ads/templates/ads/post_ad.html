@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% block content %}
+  <style>
+    /* Styling for the form container */
+    .form-container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    /* Heading style */
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: #333;
+    }
+
+    /* Styling for form elements */
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    form input, form select, form textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 15px;
+      font-size: 16px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      width: 100%;
+    }
+
+    form input[type="file"] {
+      padding: 5px;
+    }
+
+    /* Submit button styling */
+    button[type="submit"] {
+      padding: 12px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s ease;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+
+    /* Floating button styling */
+    .top-right-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      text-decoration: none;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s ease;
+    }
+
+    .top-right-btn:hover {
+      background-color: #218838;
+    }
+  </style>
+
+  <div class="form-container">
+    <h2>Post an Ad</h2>
+
+    <!-- Button to trigger a Django view (placed in the top-right corner) -->
+    <a href="{% url 'car_data' %}" class="top-right-btn">Check price</a>
+
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Post Ad</button>
+    </form>
+  </div>
+<BR><center>
+{% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+{% endblock %}
+</center>

@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% block content %}
+  <style>
+    /* Style for the entire content area */
+    .content-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Styling for the search form */
+    form {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      width: 300px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    button[type="submit"] {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      margin-left: 10px;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    button[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+
+    /* Styling for the ads list */
+    .ads-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    /* Styling for each individual ad item */
+    .ad-item {
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .ad-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .ad-item img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .ad-item h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .ad-item p {
+      font-size: 16px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    /* Styling for the empty result message */
+    .no-ads {
+      text-align: center;
+      font-size: 18px;
+      color: #888;
+      margin-top: 50px;
+    }
+  </style>
+
+  <div class="content-wrapper">
+    <h2>Vehicle Ads</h2>
+
+    <!-- Search Form -->
+    <form method="GET" action="{% url 'ads_list' %}">
+      <input type="text" name="q" value="{{ query }}" placeholder="Search by vehicle name...">
+      <button type="submit">Search</button>
+    </form>
+
+    <div class="ads-list">
+      {% for ad in ads %}
+        <div class="ad-item">
+          <img src="{{ ad.image.url }}" alt="{{ ad.name }}">
+          <h3>{{ ad.name }} - {{ ad.model }}</h3>
+          <p>Price: ${{ ad.price }}</p>
+        </div>
+      {% empty %}
+        <p class="no-ads">No ads found matching your search.</p>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
